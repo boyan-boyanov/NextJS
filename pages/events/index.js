@@ -1,9 +1,15 @@
-function Events (){
+import { getFeaturedEvents } from '../dummy-data';
+
+
+function Events() {
+    const featuredEvents = getFeaturedEvents();
     return (
         <div>
-            <h1>Events Page</h1>
+            <ul>
+
+            </ul>
         </div>
-       
+
     )
 }
 
