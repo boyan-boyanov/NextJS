@@ -1,4 +1,4 @@
-function CurrentEvenr () {
+function EventDetailPage () {
     return (
         <div>
             <h1>Current Event Info</h1>
@@ -6,4 +6,4 @@ function CurrentEvenr () {
     )
 }
 
-export default CurrentEvenr
+export default EventDetailPage
