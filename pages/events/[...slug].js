@@ -1,5 +1,10 @@
 import { useRouter } from 'next/router'
 import { getFilteredEvents } from '../../dummy-data';
+import EventList from '../../components/events/event-list';
+import ResultsTitle from '../../components/events/results-title';
+import { Fragment } from 'react';
+import Button from '../../components/ui/button';
+import ErrorAlert from '../../components/ui/error-alert';
 
 function FilteredEvents() {
     const router = useRouter();
@@ -12,8 +17,20 @@ function FilteredEvents() {
     const filteredYear = Number(filteredData[0]);
     const filteredMonth = Number(filteredData[1]);
 
-    if (isNaN(filteredYear) || isNaN(filteredMonth) || filteredMonth < 1 || filteredMonth > 12){
-        return <p className='center'>Invalid filter try again</p>
+    if (isNaN(filteredYear) || isNaN(filteredMonth) || filteredMonth < 1 || filteredMonth > 12) {
+        return (
+            <Fragment>
+                <ErrorAlert>
+                    <p>Invalid filter try again</p>
+                </ErrorAlert>
+                <div className='center'>
+                    <Button link='/events'>Show All Events</Button>
+                </div>
+            </Fragment>
+
+        )
+
+
     }
 
     const filteredEvents = getFilteredEvents({
@@ -21,15 +38,28 @@ function FilteredEvents() {
         month: filteredMonth
     })
 
-    if(!filteredEvents || filteredEvents.length === 0){
-        return <p className='center'>No events Found</p>
+    if (!filteredEvents || filteredEvents.length === 0) {
+        return (
+            <Fragment>
+                <ErrorAlert>
+                    <p>No events Found</p>
+                </ErrorAlert>
+
+                <div className='center'>
+                    <Button link='/events'>Show All Events</Button>
+                </div>
+            </Fragment>
+
+        )
     }
-        console.log(filteredData);
+
+    const date = new Date(filteredYear, filteredMonth - 1);
 
     return (
-        <div>
-            <h1>Filtered Events</h1>
-        </div>
+        <>
+            <ResultsTitle date={date} />
+            <EventList items={filteredEvents} />
+        </>
     )
 }
 

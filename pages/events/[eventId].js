@@ -3,20 +3,31 @@ import { Fragment } from 'react';
 import { getEventById } from '../../dummy-data'
 import EventSummary from '../../components/event-detail/event-summary';
 import EventLogistics from '../../components/event-detail/event-logistics';
-import EventContent from '../../components/event-detail/event-content'
+import EventContent from '../../components/event-detail/event-content';
+import ErrorAlert from '../../components/ui/error-alert';
+import Button from '../../components/ui/button';
 
 function EventDetailPage() {
     const router = useRouter();
 
     const eventId = router.query.eventId;
     const event = getEventById(eventId);
+    console.log(event);
 
     if (!event) {
         return (
-            <div>
-                <h1>Not Event Found</h1>
-            </div>
+            <Fragment>
+                <ErrorAlert>
+                    <h1>Not Event Found</h1>
+                </ErrorAlert>
+
+                <div className='center'>
+                    <Button link='/events'>Show All Events</Button>
+                </div>
+            </Fragment>
+
         )
+
     }
 
     return (
