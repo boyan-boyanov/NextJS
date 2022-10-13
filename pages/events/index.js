@@ -1,13 +1,11 @@
-import { getFeaturedEvents } from '../dummy-data';
-
+import { getAllEvents } from '../../dummy-data';
+import EventList from '../../components/events/event-list';
 
 function Events() {
-    const featuredEvents = getFeaturedEvents();
+    const events = getAllEvents();
     return (
         <div>
-            <ul>
-
-            </ul>
+            <EventList items={events}/>
         </div>
 
     )
