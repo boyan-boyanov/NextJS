@@ -30,6 +30,8 @@ export async function getStaticProps() {
   return {
     props: {
       events: featuredEvents
-    }
+    },
+    //auto-refresh for half-day  43200sec
+     revalidate: 43200
   }
 }
