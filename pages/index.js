@@ -1,13 +1,14 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import { getFeaturedEvents } from '../dummy-data'
 import EventList from '../components/events/event-list'
+import { getFeaturedEvents } from '../service/api-util'
 
 export default function HomePage(props) {
+
   console.log(props);
-  const featuredEvents = getFeaturedEvents();
-  
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -16,18 +17,19 @@ export default function HomePage(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      
-        <div>
-          <EventList items={featuredEvents}/>
-        </div>   
+
+      <div>
+        <EventList items={props.events} />
+      </div>
     </div>
   )
 }
 
 export async function getStaticProps() {
+  const featuredEvents = await getFeaturedEvents()
   return {
     props: {
-      featuredEvents: "Test static props"
+      events: featuredEvents
     }
   }
 }
