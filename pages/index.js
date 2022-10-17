@@ -4,7 +4,8 @@ import styles from '../styles/Home.module.css'
 import { getFeaturedEvents } from '../dummy-data'
 import EventList from '../components/events/event-list'
 
-export default function HomePage() {
+export default function HomePage(props) {
+  console.log(props);
   const featuredEvents = getFeaturedEvents();
   
   return (
@@ -18,12 +19,15 @@ export default function HomePage() {
       
         <div>
           <EventList items={featuredEvents}/>
-        </div>
-
-
-      
-
-
+        </div>   
     </div>
   )
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      featuredEvents: "Test static props"
+    }
+  }
 }
